@@ -1,24 +1,29 @@
 enum BinaryGap {
     static func solution(_ N : Int) -> Int {
-        var currentGap = 0
-        var longestGap = 0
         var isInsideGap = false
-
-        for offset in 0..<64 {
-            if (1 << offset) & N > 0 {
+        var currentGapSize = 0
+        var previousBitIsOn = false
+        var maxGapSize = 0
+        for bitIndex in 0...31 {
+            let mask = (1 << bitIndex)
+            if (N & mask) > 0 { // bit at `bitIndex` is on
+                previousBitIsOn = true
                 if isInsideGap {
-                    longestGap = max(currentGap, longestGap)
+                    maxGapSize = max(maxGapSize, currentGapSize)
                     isInsideGap = false
                 }
             } else {
-                if offset > 0 && (1 << (offset-1)) & N > 0 {
+                if previousBitIsOn {
                     isInsideGap = true
-                    currentGap = 0
+                    previousBitIsOn = false
+                    currentGapSize = 0
                 }
-                currentGap += 1
+                if isInsideGap {
+                    currentGapSize += 1
+                }
             }
         }
 
-        return longestGap
+        return maxGapSize
     }
 }
