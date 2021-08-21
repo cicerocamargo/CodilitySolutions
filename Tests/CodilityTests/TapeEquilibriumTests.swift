@@ -9,4 +9,3 @@ final class TapeEquilibriumTests: XCTestCase {
         XCTAssertEqual(TapeEquilibrium.solution([-1_000, 1_000]), 2_000)
     }
 }
-
