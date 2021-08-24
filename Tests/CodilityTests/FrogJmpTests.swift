@@ -11,4 +11,3 @@ final class FrogJmpTests: XCTestCase {
         XCTAssertEqual(FrogJmp.solution(1, 4, 2), 2)
     }
 }
-
